@@ -1,0 +1,18 @@
+[
+    {
+        "category":[
+            {
+                "uuid":"",
+                "data":{
+                    "flow-in":[],
+                    "flow-out":[],
+                    "input":[],
+                    "output":[],
+                    "name":"",
+                    "description":"",
+                    "type":""
+                }
+            }
+        ]
+    }
+]

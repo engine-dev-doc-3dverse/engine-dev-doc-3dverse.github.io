@@ -1,0 +1,183 @@
+/* Colors */
+:root {
+    --node-card-background-color: #292E42;
+    --primary-background-color: #1C2133;
+    --secondary-background-color: #121625;
+    --border-primary-background-color: #121625;
+    --buttons-discrete-background-color: #1C2133;
+    --buttons-hovered-background-color: #292E42;
+    --border-secondary-background-color: 228.000deg,23.077%,25.490%;
+    --navbar-height: 4.6875rem;
+    --sidebar-width: 17.5rem;
+}
+
+/* Track (the area behind the thumb) */
+::-webkit-scrollbar {
+    width: 0.4rem; /* Set the width of the scrollbar */
+}
+
+/* Thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+    background: #d80f15; /* Set the color of the thumb */
+    border-radius: 1rem;
+}
+
+/* Handle (the part of the thumb that's draggable) */
+::-webkit-scrollbar-thumb:hover {
+    background: #9b1014; /* Set the hover color of the thumb */
+}
+
+/* Global Components Cleaning */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+    background-color: var(--secondary-background-color);
+    color: white;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.collapsible-content {
+    display: none;
+}
+
+/* Header Specific */
+
+header {
+    position:sticky;
+    top:0;
+    width:100%;
+    height: var(--navbar-height);
+    box-shadow: 0 0 40px 0 rgba(115,134,160,.24);
+    /* fonts properties */
+    font-family: "Manrope", sans-serif;
+    font-size: 1rem;
+    font-weight: normal;
+    text-transform: uppercase;
+
+    & .navbar {
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        height:100%;
+
+        & h1 { /* override user agent stylesheet */
+            font-size: 1rem;
+            font-weight: normal;
+        }
+
+        & ul.menu {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 1rem;
+            position:relative;
+            background-color: var(--secondary-background-color);
+        }
+
+        & .logo {
+            display: flex;
+            align-items: center;
+            margin-left: 1rem;
+            padding-right: 0.75rem !important;
+    
+            & .logo-svg {
+                width: 2rem;
+                height: 2rem;
+                margin-right: 1rem;
+            }
+        }
+    }
+
+    & .discrete-button {
+        padding: 0.5rem 0.5rem;
+    }
+}
+
+header::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: hsla(var(--border-secondary-background-color), .6);
+}
+
+.discrete-button {
+    margin: 0 1rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    background-color: var(--buttons-discrete-background-color);
+    transition: 250ms ease-in-out;
+}
+
+.discrete-button:hover {
+    background-color: var(--buttons-hovered-background-color);
+    transition: 150ms ease-in-out;
+}
+
+main {
+    display: flex;
+    height:calc(100vh - var(--navbar-height));
+
+    & aside {
+        width: var(--sidebar-width);
+        padding: 2.5rem 1.875rem;
+        background-color: var(--secondary-background-color);
+        border-right: hsla(var(--border-secondary-background-color), .6) 1px solid;
+        overflow:auto;
+    }
+
+    & section#documentation {
+        background-color: var(--secondary-background-color);
+        width:calc(100% - var(--sidebar-width));
+        height:100%;
+        padding-top:3rem;
+        overflow:auto;
+
+        & .container {
+            background-color: var(--primary-background-color);
+            width:95%;
+            margin:auto;
+            padding: 2.5rem;
+            border-radius: 0.25rem;
+            box-shadow: 0 0 40px 0 rgba(115,134,160,.24);
+        }
+    }
+}
+
+.nodes-category-title {
+    text-transform: uppercase;
+}
+
+.nodes-category-container {
+    padding: 0 0.5rem;
+}
+
+.node-card {
+    background-color: var(--node-card-background-color);
+}
+
+.node-anchor-link {
+    overflow-wrap: break-word;
+}
