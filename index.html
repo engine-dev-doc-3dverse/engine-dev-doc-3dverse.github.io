@@ -9,6 +9,7 @@
         <meta charset="UTF-8">
         <link href="./src/styles/style.css" rel="stylesheet" text="text/css">
         <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,400,700|Manrope,700" rel="stylesheet">
+        <link href="./src/styles/prism.min.css" rel="stylesheet" />
     </head>
     <body>
         <header>
@@ -21,28 +22,29 @@
                 <a class="logo discrete-button" href="#"><img src="./src/images/logo.svg" alt="logo" class="logo-svg"><h1>3dverse Nodes Documentation</h1></a>
                 <ul class="menu">
                     <li><a href="#" class="discrete-button">Getting Started</a></li>
-                    <li><a href="https://docs.3dverse.com/sdk/index.html" class="discrete-button">SDK Documentation</a></li>
-                    <li><a href="https://labs.3dverse.com/" class="discrete-button">Labs</a></li>
+                    <li><a href="https://docs.3dverse.com/sdk/index.html" class="discrete-button">Engine Documentation</a></li>
                 </ul>
             </nav>
         </header>
         <main>
             <aside id="sidebar">
-                <nav class="sidebar">
-                    <h2>Nodes</h2>
-                    <ul id="sidebar-nodes-link-list">
-                    </ul>
+                <div class="search-bar">
+                    <label for="nodes-search-input"><i class="fa-solid fa-magnifying-glass"></i></label>
+                    <input id="nodes-search-input" type="text" placeholder="Search Nodes..." >
+                </div>
+                <nav>
+                    <ul id="sidebar-nodes-categories-list"></ul>
                 </nav>
             </aside>
             <section id="documentation">
-                <article id="nodes-definitions-container" class="container">
-                    
-                </article>
+
             </section>
         </main>
         <footer>
 
         </footer>
         <script src="./src/scripts/load_nodes.js"></script>
+        <script src="https://kit.fontawesome.com/c32cdcdbca.js" crossorigin="anonymous"></script>
+        <script src="./src/scripts/prism.min.js"></script>
     </body>
 </html>

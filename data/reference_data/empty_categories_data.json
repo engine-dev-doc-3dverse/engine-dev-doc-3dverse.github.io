@@ -1,0 +1,26 @@
+{
+    "Maths": {
+        "name": "Maths",
+        "name-translations": {"en": "Maths"},
+        "description": {"en": "Maths"},
+        "nodes": []
+    },
+    "Miscellaneous": {
+        "name": "Miscellaneous",
+        "name-translations": {"en": "Miscellaneous"},
+        "description": {"en": "Miscellaneous"},
+        "nodes": []
+    },
+    "Shaders": {
+        "name": "Shaders",
+        "name-translations": {"en": "Shaders"},
+        "description": {"en": "Shaders"},
+        "nodes": []
+    },
+    "Entities": {
+        "name": "Entities",
+        "name-translations": {"en": "Entities"},
+        "description": {"en": "Entities"},
+        "nodes": []
+    }
+}

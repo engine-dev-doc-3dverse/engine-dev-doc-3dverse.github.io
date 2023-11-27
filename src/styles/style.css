@@ -1,11 +1,12 @@
 /* Colors */
 :root {
-    --node-card-background-color: #292E42;
     --primary-background-color: #1C2133;
     --secondary-background-color: #121625;
     --border-primary-background-color: #121625;
     --buttons-discrete-background-color: #1C2133;
     --buttons-hovered-background-color: #292E42;
+    --search-bar-hovered-background-color: #31364a;
+    --search-bar-value-color: #c7c7c7;
     --border-secondary-background-color: 228.000deg,23.077%,25.490%;
     --navbar-height: 4.6875rem;
     --sidebar-width: 17.5rem;
@@ -55,8 +56,21 @@ a {
     color: #fff;
 }
 
+.collapsible-trigger {
+    cursor: pointer;
+}
+
 .collapsible-content {
-    display: none;
+    overflow:hidden;
+    opacity:0;
+    height:0;
+    transition:all 0.3s ease-out;
+
+}
+
+.active .collapsible-content {
+    opacity:1;
+    transition:all 0.3s ease-out;
 }
 
 /* Header Specific */
@@ -178,6 +192,83 @@ main {
     background-color: var(--node-card-background-color);
 }
 
-.node-anchor-link {
-    overflow-wrap: break-word;
+
+.search-bar {
+    position: relative;
+    display:flex;
+    max-height: 2rem;
+    align-items: center;
+    background-color: var(--buttons-hovered-background-color);
+    color: var(--search-bar-value-color);
+    border-radius: 2px;
+    transition: background-color 0.3s ease-in-out;
+
+    & input {
+        background-color: transparent;
+        border: none;
+        color: inherit;
+        caret-color: #ffc800;
+        padding: 0.5rem 0.5rem;
+        text-overflow: ellipsis;
+
+    }
+
+    & input:focus {
+        outline: none;
+    }
+
+    & i {
+        
+        position: relative;
+        display: inline-flex;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+        padding-left: 0.5rem;
+    }
 }
+
+.search-bar:hover {
+    background-color: var(--search-bar-hovered-background-color);
+    transition: background-color 0.15s ease;
+}
+
+.search-bar:has(input:focus) {
+    background-color: var(--search-bar-hovered-background-color);
+}
+
+#sidebar {
+    -webkit-user-select: none;
+    user-select: none;
+
+    & #sidebar-nodes-categories-list {
+        padding: 1.5rem 0 0 0.75rem;
+    }
+
+    & .sidebar-links-list {
+        padding-left: 0.75rem;
+    }
+
+    & .sidebar-node a:hover {
+        color: #d80f15;
+    }
+
+    & h2 {
+        font-size: 1.17em;
+        width: -moz-fit-content;
+        width: fit-content;
+    }
+
+    & .node-anchor-link {
+        overflow-wrap: break-word;
+        display:block;
+        width: -moz-fit-content;
+        width: fit-content;
+    }
+}
+
+
+
+
+
