@@ -1,4 +1,4 @@
-import { highlightElement } from "./prism.min.js";
+import { Prism } from "./prism.min.js";
 
 window.addEventListener('load', load);
 
@@ -7,6 +7,7 @@ async function load() {
     const [sidebar, main] = await generateHTML(nodesData)
     document.getElementById("sidebar-nodes-categories-list").innerHTML = sidebar;
     document.getElementById("documentation").innerHTML = main;
+    Prism.highlightAllUnder(document.getElementById("documentation"))
     loadComponentsEventListeners();
 }
 
@@ -111,7 +112,7 @@ async function generateHTML(nodesData, language = "en") {
                     </li>
                 `;
 
-                mainScriptCodeSample =  `<pre>` + highlightElement(`<code class="node-card-cpp-equivalent language-cpp">${(node.data.script)}</code>`) + `</pre>`
+                //mainScriptCodeSample =  `<pre>` + Prism.highlightElement(`<code class="node-card-cpp-equivalent language-cpp">${(node.data.script)}</code>`) + `</pre>`
 
                 main += `
                     <li id="${node.uuid}" class="node-card">
@@ -121,7 +122,7 @@ async function generateHTML(nodesData, language = "en") {
                         </div>
                         <div class="node-card-main">
                             <p class="node-card-description">${node.descriptions[language]}</p>
-                            ${mainScriptCodeSample}
+                            <code class="node-card-cpp-equivalent language-cpp">${node.data.script}</code>
                         </div>
                 `
             });
