@@ -1,3 +1,5 @@
+import { highlightElement } from "./prism.min.js";
+
 window.addEventListener('load', load);
 
 async function load() {
@@ -109,6 +111,8 @@ async function generateHTML(nodesData, language = "en") {
                     </li>
                 `;
 
+                mainScriptCodeSample =  `<pre>` + highlightElement(`<code class="node-card-cpp-equivalent language-cpp">${(node.data.script)}</code>`) + `</pre>`
+
                 main += `
                     <li id="${node.uuid}" class="node-card">
                         <div class="node-card-header">
@@ -117,10 +121,9 @@ async function generateHTML(nodesData, language = "en") {
                         </div>
                         <div class="node-card-main">
                             <p class="node-card-description">${node.descriptions[language]}</p>
-                            <code class="node-card-cpp-equivalent language-cpp">${node.data.script}</code>
+                            ${mainScriptCodeSample}
                         </div>
                 `
-
             });
 
             sidebar += `
