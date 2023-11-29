@@ -11,6 +11,15 @@ async function load() {
     loadComponentsEventListeners();
 }
 
+function capitalizeFirstLetter(string) {
+    return string.replace(/^\w/, (c) => c.toUpperCase());
+}
+  
+
+function escapeHTML(string) {
+    return string.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 function collapseCollapsible(element) {
     element.style.height = 0 + 'px';
 }
@@ -81,6 +90,38 @@ async function loadComponentsEventListeners() {
     registerNodeSearch();
 }
 
+function generateNodeParametersHTMLElements(key, node) {
+    let parameters = `<h4>${capitalizeFirstLetter(key)} : </h4><ul>`;
+    node.data[key].forEach(parameterData => {
+        parameters += `<pre class="node-card-cpp-equivalent language-cpp"><code>${ parameterData.type }:${ parameterData.name != "" ? parameterData.name : "out" }</code>${ parameterData.script ? ` = <code>${ escapeHTML(parameterData.script) }</code>` : `` }</pre>`
+    });
+    parameters += `</ul>`;
+    return parameters
+}
+
+function generateNodeSidebarHTMLElements(node) {
+    return `<li class="sidebar-node"><a href="#${node.uuid}" class="node-anchor-link">${node.name}</a></li>`;
+}
+
+function generateNodeMainHTMLElements(node, language) {
+    console.log(node.data["inputs"].length)
+    let mainElement = `
+    <li id="${node.uuid}" class="node-card">
+        <div class="node-card-header">
+            <h3 class="node-card-header-title">${node.name}</h3>
+            <ul class="node-statuses-list"></ul>
+        </div>
+        <div class="node-card-main">
+            <p class="node-card-description">${node.descriptions[language]}</p>
+            ${ node.data["inputs"].length != 0 ? generateNodeParametersHTMLElements("inputs", node) : ``}
+            ${ node.data["outputs"].length != 0 ? generateNodeParametersHTMLElements("outputs", node) : ``}
+            `
+             + (node.data.script ? `<h4>Script</h4><pre class="node-card-cpp-equivalent language-cpp"><code>${escapeHTML(node.data.script)}</code></pre>` : ``) +
+        `</div>
+    </li>`
+    return mainElement;
+}
+
 async function generateHTML(nodesData, language = "en") {
     let sidebar = "";
     let main = "";
@@ -106,25 +147,8 @@ async function generateHTML(nodesData, language = "en") {
             
             category.nodes.forEach(node => {
                 node = Object.values(node)[0];
-                sidebar += `
-                    <li class="sidebar-node">
-                        <a href="#${node.uuid}" class="node-anchor-link">${node.name}</a>
-                    </li>
-                `;
-
-                //mainScriptCodeSample =  `<pre>` + Prism.highlightElement(`<code class="node-card-cpp-equivalent language-cpp">${(node.data.script)}</code>`) + `</pre>`
-
-                main += `
-                    <li id="${node.uuid}" class="node-card">
-                        <div class="node-card-header">
-                            <h3 class="node-card-header-title">${node.name}</h3>
-                            <ul class="node-statuses-list"></ul>
-                        </div>
-                        <div class="node-card-main">
-                            <p class="node-card-description">${node.descriptions[language]}</p>
-                            <code class="node-card-cpp-equivalent language-cpp">${node.data.script}</code>
-                        </div>
-                `
+                sidebar += generateNodeSidebarHTMLElements(node);
+                main += generateNodeMainHTMLElements(node, language);
             });
 
             sidebar += `
