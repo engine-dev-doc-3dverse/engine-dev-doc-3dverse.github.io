@@ -36,14 +36,21 @@
                     <ul id="sidebar-nodes-categories-list"></ul>
                 </nav>
             </aside>
+            <section id="tools">
+                <ul>
+                    <li id="trigger-all-collapsibles">Expand all</li>
+                    <li><a href="#nodes-miscellaneous-definitions-container">Up ↑</a></li> <!-- Currently hardcoded for ___DEPRECATED_Blend node -->
+                </ul>
+            </section>
+
             <section id="documentation">
-                
+                <footer></footer> <!-- Currently destroyed when the documentation is set to the documentation.innerHTML instead of appened as child by the top -->
             </section>
         </main>
         <footer>
-
+            
         </footer>
-        <script type="module" src="./src/scripts/load_nodes.js"></script>
+        <script type="module" src="./src/scripts/onload.js"></script>
         <script src="https://kit.fontawesome.com/c32cdcdbca.js" crossorigin="anonymous"></script>
 
     </body>

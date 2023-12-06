@@ -1,9 +1,25 @@
+export async function registerNodeSearch() {
+    document.getElementById('nodes-search-input').addEventListener('keyup', searchNodes);
+}
 
-async function collapseCollapsible(element) {
+export async function registerCollapsibles() {
+    /* Init Collapsibles */
+    document.querySelectorAll('.collapsible').forEach((collapsible) => collapsible.querySelector('.collapsible-trigger').addEventListener('click', () => triggerCollapsible(collapsible)));
+}
+
+export async function registerClipboardCopyButtons() {
+    /* Init Collapsibles */
+    document.querySelectorAll('.copy-onclick').forEach((copyButton) => { 
+        copyButton.addEventListener('click', () => { copyTextToClipboard(copyButton)});
+    });
+}
+
+/* COLLAPSIBLES */
+function collapseCollapsible(element) {
     element.style.height = 0 + 'px';
 }
 
-async function expandCollapsible(element) {
+function expandCollapsible(element) {
     var sectionHeight = element.scrollHeight;
     element.style.height = sectionHeight + 'px';
 }
@@ -27,12 +43,6 @@ async function setCollapsibleState(collapsible, state) {
     }
 }
 
-async function registerCollapsibles() {
-    /* Init Collapsibles */
-    document.querySelectorAll('.collapsible').forEach((collapsible) => collapsible.querySelector('.collapsible-trigger').addEventListener('click', () => triggerCollapsible(collapsible)));
-}
-
-
 function toggleDisplayState(element, displayState) {
     if(displayState) {
         element.style.display = 'block';
@@ -41,13 +51,17 @@ function toggleDisplayState(element, displayState) {
     }
 }
 
+export async function triggerAllCollapsibles(newState) {
+    document.getElementById('documentation').querySelectorAll('.collapsible').forEach((collapsible) => {setCollapsibleState(collapsible, newState) });
+}
+
 async function searchNodes(event) {
     const searchInput = event.target.value.toLowerCase();
     
     const categories = document.querySelectorAll('.sidebar-category-container');
     categories.forEach(category => {
-        displayCategory = false;
-        nodes = category.querySelectorAll('.node-anchor-link');
+        let displayCategory = false;
+        const nodes = category.querySelectorAll('.node-anchor-link');
         nodes.forEach(node => {
             toggleDisplayState(node.parentElement, (node.innerText.toLowerCase().includes(searchInput)))
             displayCategory = displayCategory || (node.innerText.toLowerCase().includes(searchInput));
@@ -60,13 +74,13 @@ async function searchNodes(event) {
     });
 }
 
-async function registerNodeSearch() {
-    document.getElementById('nodes-search-input').addEventListener('keyup', searchNodes);
-}
-
-async function loadComponentsEventListeners() {
-    registerCollapsibles();
-    registerNodeSearch();
-}
-
-loadComponentsEventListeners();
+/* COPY TEXT TO CLIPBOARD BUTTONS */
+async function copyTextToClipboard(copyButton) {
+    const copiedText = copyButton.getElementsByClassName('copy-onclick-content')[0].innerHTML; 
+    navigator.clipboard.writeText(copiedText).then(() => {
+            let icon = copyButton.getElementsByClassName('copy-icon')[0];
+            icon.classList.replace('fa-copy', 'fa-check');
+            setTimeout(()=>{icon.classList.replace('fa-check', 'fa-copy');}, 3000);
+        }),
+        () => { /* clipboard write failed */ }
+    };

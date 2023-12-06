@@ -7,6 +7,7 @@
     --buttons-hovered-background-color: #292E42;
     --search-bar-hovered-background-color: #31364a;
     --search-bar-value-color: #c7c7c7;
+    --subtitle-hovered-color: #414a69;
     --border-secondary-background-color: 228.000deg,23.077%,25.490%;
     --navbar-height: 4.6875rem;
     --sidebar-width: 17.5rem;
@@ -55,6 +56,7 @@ a {
     text-decoration: none;
     color: #fff;
 }
+
 
 .collapsible-trigger {
     cursor: pointer;
@@ -177,6 +179,15 @@ main {
             border-radius: 0.25rem;
             box-shadow: 0 0 40px 0 rgba(115,134,160,.24);
         }
+
+        & ul.node-parameters-list {
+            display:flex;
+            flex-wrap: wrap;
+            
+            & li {
+                margin-right: 1rem;
+            }
+        }
     }
 }
 
@@ -188,8 +199,34 @@ main {
     padding: 0 0.5rem;
 }
 
+h2.category-title {
+    font-size: 3rem;
+}
+
+.category-nodes-list {
+    margin-top: 2rem;
+}
+
 .node-card {
+    margin-bottom: 3rem;
+    padding-left: 1.5rem;
     background-color: var(--node-card-background-color);
+
+    & .node-card-uuid-subtitle {
+        cursor:pointer;
+        width: -moz-fit-content;
+        width: fit-content;
+        color: var(--search-bar-hovered-background-color);
+    }
+
+    & .node-card-uuid-subtitle:hover {
+        color: var(--subtitle-hovered-color);
+    }
+
+    & .node-card-main {
+        padding-left: 0.75rem;
+    }
+    
 }
 
 
@@ -281,5 +318,14 @@ pre {
 
 
 
+#tools {
+    position:absolute;
+    bottom: 1rem;
+    right: 1rem;
 
-
+    & ul {
+        display:flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+}
